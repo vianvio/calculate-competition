@@ -15,11 +15,27 @@
             <div class="settings-form">
                 <div class="setting-group">
                     <label>计算类型</label>
-                    <div class="checkbox-group">
-                        <label><input type="checkbox" name="calculationType" value="addition" checked> ➕ 加法</label>
-                        <label><input type="checkbox" name="calculationType" value="subtraction"> ➖ 减法</label>
-                        <label><input type="checkbox" name="calculationType" value="multiplication"> ✖️ 乘法</label>
-                        <label><input type="checkbox" name="calculationType" value="division"> ➗ 除法</label>
+                    <div class="calculation-types">
+                        <label class="calc-type-card">
+                            <input type="checkbox" name="calculationType" value="addition" checked>
+                            <span class="calc-icon">➕</span>
+                            <span class="calc-name">加法</span>
+                        </label>
+                        <label class="calc-type-card">
+                            <input type="checkbox" name="calculationType" value="subtraction">
+                            <span class="calc-icon">➖</span>
+                            <span class="calc-name">减法</span>
+                        </label>
+                        <label class="calc-type-card">
+                            <input type="checkbox" name="calculationType" value="multiplication">
+                            <span class="calc-icon">✖️</span>
+                            <span class="calc-name">乘法</span>
+                        </label>
+                        <label class="calc-type-card">
+                            <input type="checkbox" name="calculationType" value="division">
+                            <span class="calc-icon">➗</span>
+                            <span class="calc-name">除法</span>
+                        </label>
                     </div>
                 </div>
 
@@ -42,11 +58,17 @@
                 </div>
 
                 <div class="setting-group">
-                    <label><input type="checkbox" id="hasRemainder"> 除法有余数</label>
+                    <label class="checkbox-card">
+                        <input type="checkbox" id="hasRemainder">
+                        <span class="checkbox-label">除法有余数</span>
+                    </label>
                 </div>
 
                 <div class="setting-group">
-                    <label><input type="checkbox" id="hasTimeLimit"> 限制时长</label>
+                    <label class="checkbox-card">
+                        <input type="checkbox" id="hasTimeLimit">
+                        <span class="checkbox-label">限制时长</span>
+                    </label>
                 </div>
 
                 <div class="setting-group" id="timeLimitGroup" style="display: none;">
