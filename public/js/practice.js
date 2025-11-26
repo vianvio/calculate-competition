@@ -31,6 +31,30 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
+function adjustQuestionCount(change) {
+    const input = document.getElementById('questionCount');
+    const currentValue = parseInt(input.value) || 10;
+    const newValue = currentValue + change;
+    const min = parseInt(input.min) || 5;
+    const max = parseInt(input.max) || 100;
+    
+    if (newValue >= min && newValue <= max) {
+        input.value = newValue;
+    }
+}
+
+function adjustTimeLimit(change) {
+    const input = document.getElementById('timeLimit');
+    const currentValue = parseInt(input.value) || 5;
+    const newValue = currentValue + change;
+    const min = parseInt(input.min) || 1;
+    const max = parseInt(input.max) || 60;
+    
+    if (newValue >= min && newValue <= max) {
+        input.value = newValue;
+    }
+}
+
 async function startPractice() {
     // Collect settings
     const calculationTypes = Array.from(document.querySelectorAll('input[name="calculationType"]:checked'))

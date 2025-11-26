@@ -195,6 +195,43 @@ select.input-medium {
     cursor: pointer;
 }
 
+/* Number control */
+.number-control {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.number-control .input-medium {
+    flex: 1;
+    max-width: 150px;
+    text-align: center;
+}
+
+.btn-control {
+    width: 50px;
+    height: 50px;
+    font-size: 24px;
+    font-weight: bold;
+    border: 2px solid var(--secondary-color);
+    border-radius: 10px;
+    background: white;
+    color: var(--secondary-color);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+}
+
+.btn-control:hover {
+    background: var(--secondary-color);
+    color: white;
+    transform: scale(1.05);
+}
+
+.btn-control:active {
+    transform: scale(0.95);
+}
+
 /* Modal */
 .modal {
     position: fixed;

@@ -25,7 +25,11 @@
 
                 <div class="setting-group">
                     <label>习题数量</label>
-                    <input type="number" id="questionCount" value="10" min="5" max="100" class="input-medium">
+                    <div class="number-control">
+                        <button type="button" class="btn-control" onclick="adjustQuestionCount(-1)">-1</button>
+                        <input type="number" id="questionCount" value="10" min="5" max="100" class="input-medium">
+                        <button type="button" class="btn-control" onclick="adjustQuestionCount(1)">+1</button>
+                    </div>
                 </div>
 
                 <div class="setting-group">
@@ -47,7 +51,11 @@
 
                 <div class="setting-group" id="timeLimitGroup" style="display: none;">
                     <label>总时长（分钟）</label>
-                    <input type="number" id="timeLimit" value="5" min="1" max="60" class="input-medium">
+                    <div class="number-control">
+                        <button type="button" class="btn-control" onclick="adjustTimeLimit(-1)">-1</button>
+                        <input type="number" id="timeLimit" value="5" min="1" max="60" class="input-medium">
+                        <button type="button" class="btn-control" onclick="adjustTimeLimit(1)">+1</button>
+                    </div>
                 </div>
             </div>
 
