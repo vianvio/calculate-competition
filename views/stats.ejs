@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>用户统计</title>
+    <link rel="stylesheet" href="/public/css/style.css">
+</head>
+<body class="stats-page">
+    <div class="container">
+        <h1>📊 用户统计</h1>
+        
+        <div id="userInfo" class="user-info"></div>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon">📝</div>
+                <div class="stat-label">日常练习总题数</div>
+                <div class="stat-value" id="totalProblems">0</div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon">✅</div>
+                <div class="stat-label">日常模式正确率</div>
+                <div class="stat-value" id="practiceAccuracy">0%</div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon">🏆</div>
+                <div class="stat-label">竞速获胜次数</div>
+                <div class="stat-value" id="competitionWins">0</div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon">📈</div>
+                <div class="stat-label">竞速胜率</div>
+                <div class="stat-value" id="winRate">0%</div>
+            </div>
+        </div>
+
+        <div class="button-group">
+            <a href="/select-user" class="btn btn-secondary">返回</a>
+            <a href="/competition-records/<%= userId %>" class="btn btn-primary">对抗记录</a>
+        </div>
+    </div>
+
+    <script>
+        const userId = <%= userId %>;
+    </script>
+    <script src="/public/js/main.js"></script>
+    <script src="/public/js/stats.js"></script>
+</body>
+</html>

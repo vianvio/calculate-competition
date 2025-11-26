@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>对抗竞速记录</title>
+    <link rel="stylesheet" href="/public/css/style.css">
+</head>
+<body class="records-page">
+    <div class="container">
+        <h1>🏁 对抗竞速记录</h1>
+        
+        <div id="recordsList" class="records-list"></div>
+
+        <div class="button-group">
+            <a href="/stats/<%= userId %>" class="btn btn-secondary">返回统计</a>
+            <a href="/select-user" class="btn btn-primary">返回首页</a>
+        </div>
+    </div>
+
+    <script>
+        const userId = <%= userId %>;
+    </script>
+    <script src="/public/js/main.js"></script>
+    <script src="/public/js/competition-records.js"></script>
+</body>
+</html>

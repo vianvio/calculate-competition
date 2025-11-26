@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>选择用户</title>
+    <link rel="stylesheet" href="/public/css/style.css">
+</head>
+<body class="select-user-page">
+    <div class="container">
+        <h1>🎓 数学口算练习</h1>
+        <h2>选择用户</h2>
+        
+        <div id="userList" class="user-grid"></div>
+        
+        <button class="btn btn-primary btn-large" onclick="showAddUserModal()">
+            ➕ 添加新用户
+        </button>
+    </div>
+
+    <!-- Add User Modal -->
+    <div id="addUserModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <h3>添加新用户</h3>
+            <input type="text" id="userName" placeholder="输入用户名" class="input-large">
+            <div class="modal-buttons">
+                <button class="btn btn-secondary" onclick="hideAddUserModal()">取消</button>
+                <button class="btn btn-primary" onclick="addUser()">确定</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="/public/js/main.js"></script>
+    <script src="/public/js/select-user.js"></script>
+</body>
+</html>

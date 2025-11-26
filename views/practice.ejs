@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>日常练习</title>
+    <link rel="stylesheet" href="/public/css/style.css">
+</head>
+<body class="practice-page">
+    <!-- Settings Screen -->
+    <div id="settingsScreen" class="screen active">
+        <div class="container">
+            <h1>⚙️ 练习设置</h1>
+            
+            <div class="settings-form">
+                <div class="setting-group">
+                    <label>计算类型</label>
+                    <div class="checkbox-group">
+                        <label><input type="checkbox" name="calculationType" value="addition" checked> ➕ 加法</label>
+                        <label><input type="checkbox" name="calculationType" value="subtraction"> ➖ 减法</label>
+                        <label><input type="checkbox" name="calculationType" value="multiplication"> ✖️ 乘法</label>
+                        <label><input type="checkbox" name="calculationType" value="division"> ➗ 除法</label>
+                    </div>
+                </div>
+
+                <div class="setting-group">
+                    <label>习题数量</label>
+                    <input type="number" id="questionCount" value="10" min="5" max="100" class="input-medium">
+                </div>
+
+                <div class="setting-group">
+                    <label>运算位数</label>
+                    <select id="digits" class="input-medium">
+                        <option value="1">1位数</option>
+                        <option value="2" selected>2位数</option>
+                        <option value="3">3位数</option>
+                    </select>
+                </div>
+
+                <div class="setting-group">
+                    <label><input type="checkbox" id="hasRemainder"> 除法有余数</label>
+                </div>
+
+                <div class="setting-group">
+                    <label><input type="checkbox" id="hasTimeLimit"> 限制时长</label>
+                </div>
+
+                <div class="setting-group" id="timeLimitGroup" style="display: none;">
+                    <label>总时长（分钟）</label>
+                    <input type="number" id="timeLimit" value="5" min="1" max="60" class="input-medium">
+                </div>
+            </div>
+
+            <div class="button-group">
+                <a href="/select-user" class="btn btn-secondary">返回</a>
+                <button class="btn btn-primary btn-large" onclick="startPractice()">开始练习</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Practice Screen -->
+    <div id="practiceScreen" class="screen">
+        <div class="practice-header">
+            <div class="progress-info">
+                <span id="currentQuestion">1</span> / <span id="totalQuestions">10</span>
+            </div>
+            <div class="timer" id="timer">00:00</div>
+            <div class="stats">
+                <span class="correct" id="correctCount">✓ 0</span>
+                <span class="wrong" id="wrongCount">✗ 0</span>
+            </div>
+        </div>
+
+        <div class="question-container">
+            <div class="question-display" id="questionDisplay">2 + 3 = ?</div>
+            <div id="normalAnswerContainer">
+                <input type="tel" id="answerInput" class="answer-input" placeholder="输入答案" autofocus>
+            </div>
+            <div id="divisionAnswerContainer" style="display: none;">
+                <div class="division-inputs">
+                    <div class="division-input-group">
+                        <label>商：</label>
+                        <input type="tel" id="quotientInput" class="answer-input-small" placeholder="商">
+                    </div>
+                    <div class="division-input-group">
+                        <label>余数：</label>
+                        <input type="tel" id="remainderInput" class="answer-input-small" placeholder="余数">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="number-pad">
+            <button class="num-btn" onclick="inputNumber('1')">1</button>
+            <button class="num-btn" onclick="inputNumber('2')">2</button>
+            <button class="num-btn" onclick="inputNumber('3')">3</button>
+            <button class="num-btn" onclick="inputNumber('4')">4</button>
+            <button class="num-btn" onclick="inputNumber('5')">5</button>
+            <button class="num-btn" onclick="inputNumber('6')">6</button>
+            <button class="num-btn" onclick="inputNumber('7')">7</button>
+            <button class="num-btn" onclick="inputNumber('8')">8</button>
+            <button class="num-btn" onclick="inputNumber('9')">9</button>
+            <button class="num-btn" onclick="clearInput()">清除</button>
+            <button class="num-btn" onclick="inputNumber('0')">0</button>
+            <button class="num-btn btn-submit" onclick="submitAnswer()">确定</button>
+        </div>
+    </div>
+
+    <!-- Result Screen -->
+    <div id="resultScreen" class="screen">
+        <div class="container result-container">
+            <h1>🎉 练习完成！</h1>
+            
+            <div class="result-stats">
+                <div class="stat-item">
+                    <div class="stat-label">总题数</div>
+                    <div class="stat-value" id="resultTotal">10</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-label">正确</div>
+                    <div class="stat-value correct" id="resultCorrect">8</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-label">错误</div>
+                    <div class="stat-value wrong" id="resultWrong">2</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-label">正确率</div>
+                    <div class="stat-value" id="resultAccuracy">80%</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-label">用时</div>
+                    <div class="stat-value" id="resultTime">02:35</div>
+                </div>
+            </div>
+
+            <div id="perfectResult" class="perfect-badge" style="display: none;">
+                ⭐️ 全对！太棒了！
+            </div>
+
+            <div class="button-group">
+                <a href="/practice/<%= userId %>" class="btn btn-secondary">再来一次</a>
+                <a href="/calendar/<%= userId %>" class="btn btn-primary">查看日历</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const userId = <%= userId %>;
+    </script>
+    <script src="/public/js/main.js"></script>
+    <script src="/public/js/practice.js"></script>
+</body>
+</html>

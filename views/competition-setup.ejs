@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>对抗竞速设置</title>
+    <link rel="stylesheet" href="/public/css/style.css">
+</head>
+<body class="competition-setup-page">
+    <div class="container">
+        <h1>🏆 对抗竞速设置</h1>
+        
+        <div class="settings-form">
+            <div class="setting-group">
+                <label>左侧玩家</label>
+                <select id="player1" class="input-large"></select>
+            </div>
+
+            <div class="setting-group">
+                <label>右侧玩家</label>
+                <select id="player2" class="input-large"></select>
+            </div>
+
+            <div class="setting-group">
+                <label>竞速模式</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="mode" value="accuracy" checked> 准确率模式（分开计算，比正确率和用时）</label>
+                    <label><input type="radio" name="mode" value="speed"> 竞速抢答模式（同题抢答，先对者得分）</label>
+                </div>
+            </div>
+
+            <div class="setting-group">
+                <label>计算类型</label>
+                <div class="checkbox-group">
+                    <label><input type="checkbox" name="calculationType" value="addition" checked> ➕ 加法</label>
+                    <label><input type="checkbox" name="calculationType" value="subtraction"> ➖ 减法</label>
+                    <label><input type="checkbox" name="calculationType" value="multiplication"> ✖️ 乘法</label>
+                    <label><input type="checkbox" name="calculationType" value="division"> ➗ 除法</label>
+                </div>
+            </div>
+
+            <div class="setting-group">
+                <label>习题数量</label>
+                <input type="number" id="questionCount" value="10" min="5" max="50" class="input-medium">
+            </div>
+
+            <div class="setting-group">
+                <label>运算位数</label>
+                <select id="digits" class="input-medium">
+                    <option value="1">1位数</option>
+                    <option value="2" selected>2位数</option>
+                    <option value="3">3位数</option>
+                </select>
+            </div>
+
+            <div class="setting-group">
+                <label><input type="checkbox" id="hasRemainder"> 除法有余数</label>
+            </div>
+        </div>
+
+        <div class="button-group">
+            <a href="/select-user" class="btn btn-secondary">返回</a>
+            <button class="btn btn-primary btn-large" onclick="startCompetition()">开始竞速</button>
+        </div>
+    </div>
+
+    <script>
+        const userId = <%= userId %>;
+    </script>
+    <script src="/public/js/main.js"></script>
+    <script src="/public/js/competition-setup.js"></script>
+</body>
+</html>
