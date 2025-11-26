@@ -16,6 +16,7 @@ let timerInterval;
 let questionStartTime;
 let questionResults = [];
 let lastFocusedInput = null; // Track which input field is currently focused
+let inputDirection = 'ltr'; // 'ltr' (left-to-right) or 'rtl' (right-to-left)
 
 // Settings screen
 document.addEventListener('DOMContentLoaded', () => {
@@ -144,14 +145,26 @@ function inputNumber(num) {
         
         // Use the tracked focus state
         if (lastFocusedInput === 'remainder') {
-            remainderInput.value += num;
+            if (inputDirection === 'rtl') {
+                remainderInput.value = num + remainderInput.value;
+            } else {
+                remainderInput.value += num;
+            }
         } else {
             // Default to quotient input
-            quotientInput.value += num;
+            if (inputDirection === 'rtl') {
+                quotientInput.value = num + quotientInput.value;
+            } else {
+                quotientInput.value += num;
+            }
         }
     } else {
         const input = document.getElementById('answerInput');
-        input.value += num;
+        if (inputDirection === 'rtl') {
+            input.value = num + input.value;
+        } else {
+            input.value += num;
+        }
     }
 }
 
@@ -169,6 +182,14 @@ function clearInput() {
         }
     } else {
         document.getElementById('answerInput').value = '';
+    }
+}
+
+function toggleInputDirection() {
+    inputDirection = inputDirection === 'ltr' ? 'rtl' : 'ltr';
+    const toggleBtn = document.getElementById('directionToggle');
+    if (toggleBtn) {
+        toggleBtn.textContent = inputDirection === 'ltr' ? '→' : '←';
     }
 }
 

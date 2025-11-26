@@ -8,12 +8,6 @@ export class AppController {
     return { message: 'Math Competition App' };
   }
 
-  @Get('select-user')
-  @Render('select-user')
-  selectUser() {
-    return {};
-  }
-
   @Get('practice/:userId')
   @Render('practice')
   practice(@Param('userId') userId: string) {

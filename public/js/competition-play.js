@@ -12,6 +12,14 @@ let lastFocusedInput = {
     speed2: null
 };
 
+// Input direction tracking for each player/mode
+let inputDirection = {
+    player1: 'ltr',
+    player2: 'ltr',
+    speed1: 'ltr',
+    speed2: 'ltr'
+};
+
 // Player states for accuracy mode
 let player1State = {
     currentIndex: 0,
@@ -44,7 +52,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const settingsJson = localStorage.getItem('competitionSettings');
     if (!settingsJson) {
         alert('未找到竞速设置');
-        window.location.href = '/select-user';
+        window.location.href = '/';
         return;
     }
     
@@ -67,7 +75,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     } catch (error) {
         console.error('Failed to load competition data:', error);
         alert('加载竞速数据失败');
-        window.location.href = '/select-user';
+        window.location.href = '/';
     }
 });
 
@@ -179,6 +187,8 @@ function showQuestionAccuracy(player) {
 function inputNumber(player, num) {
     const state = player === 1 ? player1State : player2State;
     const question = questions[state.currentIndex];
+    const directionKey = `player${player}`;
+    const direction = inputDirection[directionKey];
     
     if (question && question.hasRemainder) {
         // For division with remainder, input to the focused field
@@ -187,13 +197,25 @@ function inputNumber(player, num) {
         const focusKey = `player${player}`;
         
         if (lastFocusedInput[focusKey] === 'remainder') {
-            remainderInput.value += num;
+            if (direction === 'rtl') {
+                remainderInput.value = num + remainderInput.value;
+            } else {
+                remainderInput.value += num;
+            }
         } else {
-            quotientInput.value += num;
+            if (direction === 'rtl') {
+                quotientInput.value = num + quotientInput.value;
+            } else {
+                quotientInput.value += num;
+            }
         }
     } else {
         const input = document.getElementById(`answer${player}`);
-        input.value += num;
+        if (direction === 'rtl') {
+            input.value = num + input.value;
+        } else {
+            input.value += num;
+        }
     }
 }
 
@@ -213,6 +235,15 @@ function clearInput(player) {
         }
     } else {
         document.getElementById(`answer${player}`).value = '';
+    }
+}
+
+function toggleInputDirection(player) {
+    const directionKey = `player${player}`;
+    inputDirection[directionKey] = inputDirection[directionKey] === 'ltr' ? 'rtl' : 'ltr';
+    const toggleBtn = document.getElementById(`directionToggle${player}`);
+    if (toggleBtn) {
+        toggleBtn.textContent = inputDirection[directionKey] === 'ltr' ? '→' : '←';
     }
 }
 
@@ -427,6 +458,8 @@ function showQuestionSpeed() {
 
 function inputNumberSpeed(player, num) {
     const question = speedState.currentQuestion;
+    const directionKey = `speed${player}`;
+    const direction = inputDirection[directionKey];
     
     if (question && question.hasRemainder) {
         // For division with remainder, input to the focused field
@@ -435,13 +468,25 @@ function inputNumberSpeed(player, num) {
         const focusKey = `speed${player}`;
         
         if (lastFocusedInput[focusKey] === 'remainder') {
-            remainderInput.value += num;
+            if (direction === 'rtl') {
+                remainderInput.value = num + remainderInput.value;
+            } else {
+                remainderInput.value += num;
+            }
         } else {
-            quotientInput.value += num;
+            if (direction === 'rtl') {
+                quotientInput.value = num + quotientInput.value;
+            } else {
+                quotientInput.value += num;
+            }
         }
     } else {
         const input = document.getElementById(`speedAnswer${player}`);
-        input.value += num;
+        if (direction === 'rtl') {
+            input.value = num + input.value;
+        } else {
+            input.value += num;
+        }
     }
 }
 
@@ -460,6 +505,15 @@ function clearInputSpeed(player) {
         }
     } else {
         document.getElementById(`speedAnswer${player}`).value = '';
+    }
+}
+
+function toggleInputDirectionSpeed(player) {
+    const directionKey = `speed${player}`;
+    inputDirection[directionKey] = inputDirection[directionKey] === 'ltr' ? 'rtl' : 'ltr';
+    const toggleBtn = document.getElementById(`speedDirectionToggle${player}`);
+    if (toggleBtn) {
+        toggleBtn.textContent = inputDirection[directionKey] === 'ltr' ? '→' : '←';
     }
 }
 

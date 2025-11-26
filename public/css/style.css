@@ -365,6 +365,13 @@ select.input-medium {
     grid-column: span 3;
 }
 
+.num-btn#directionToggle,
+.num-btn[id^="directionToggle"],
+.num-btn[id^="speedDirectionToggle"] {
+    background: var(--primary-color);
+    font-size: 28px;
+}
+
 /* Result Screen */
 .result-container h1 {
     font-size: 56px;
