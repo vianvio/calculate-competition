@@ -64,7 +64,7 @@ function startCompetition() {
     
     // Store settings and redirect to competition page
     localStorage.setItem('competitionSettings', JSON.stringify(settings));
-    window.location.href = `/competition-play`;
+    window.location.href = `/calculate-competition/competition-play`;
 }
 
 document.addEventListener('DOMContentLoaded', () => {

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>日常练习</title>
-    <link rel="stylesheet" href="/public/css/style.css">
+    <link rel="stylesheet" href="/calculate-competition/css/style.css">
 </head>
 <body class="practice-page">
     <!-- Settings Screen -->
@@ -82,7 +82,7 @@
             </div>
 
             <div class="button-group">
-                <a href="/" class="btn btn-secondary btn-large">返回</a>
+                <a href="/calculate-competition" class="btn btn-secondary btn-large">返回</a>
                 <button class="btn btn-primary btn-large" onclick="startPractice()">开始练习</button>
             </div>
         </div>
@@ -170,8 +170,8 @@
             </div>
 
             <div class="button-group">
-                <a href="/practice/<%= userId %>" class="btn btn-secondary">再来一次</a>
-                <a href="/calendar/<%= userId %>" class="btn btn-primary">查看日历</a>
+                <a href="/calculate-competition/practice/<%= userId %>" class="btn btn-secondary">再来一次</a>
+                <a href="/calculate-competition/calendar/<%= userId %>" class="btn btn-primary">查看日历</a>
             </div>
         </div>
     </div>
@@ -179,7 +179,7 @@
     <script>
         const userId = <%= userId %>;
     </script>
-    <script src="/public/js/main.js"></script>
-    <script src="/public/js/practice.js"></script>
+    <script src="/calculate-competition/js/main.js"></script>
+    <script src="/calculate-competition/js/practice.js"></script>
 </body>
 </html>

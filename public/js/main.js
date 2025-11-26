@@ -1,4 +1,6 @@
 // Common utility functions
+const BASE_PATH = '/calculate-competition';
+
 function formatTime(seconds) {
     const mins = Math.floor(seconds / 60);
     const secs = seconds % 60;
@@ -6,6 +8,9 @@ function formatTime(seconds) {
 }
 
 async function apiCall(url, method = 'GET', data = null) {
+    // Add base path if not already present
+    const fullUrl = url.startsWith(BASE_PATH) ? url : `${BASE_PATH}${url}`;
+    
     const options = {
         method,
         headers: {
@@ -17,6 +22,6 @@ async function apiCall(url, method = 'GET', data = null) {
         options.body = JSON.stringify(data);
     }
     
-    const response = await fetch(url, options);
+    const response = await fetch(fullUrl, options);
     return response.json();
 }

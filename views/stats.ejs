@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>用户统计</title>
-    <link rel="stylesheet" href="/public/css/style.css">
+    <link rel="stylesheet" href="/calculate-competition/css/style.css">
 </head>
 <body class="stats-page">
     <div class="container">
@@ -39,15 +39,15 @@
         </div>
 
         <div class="button-group">
-            <a href="/" class="btn btn-secondary">返回</a>
-            <a href="/competition-records/<%= userId %>" class="btn btn-primary">对抗记录</a>
+            <a href="/calculate-competition" class="btn btn-secondary">返回</a>
+            <a href="/calculate-competition/competition-records/<%= userId %>" class="btn btn-primary">对抗记录</a>
         </div>
     </div>
 
     <script>
         const userId = <%= userId %>;
     </script>
-    <script src="/public/js/main.js"></script>
-    <script src="/public/js/stats.js"></script>
+    <script src="/calculate-competition/js/main.js"></script>
+    <script src="/calculate-competition/js/stats.js"></script>
 </body>
 </html>

@@ -40,10 +40,10 @@ function selectUser(userId) {
         <div class="modal-content">
             <h3>选择模式</h3>
             <div style="display: flex; flex-direction: column; gap: 15px;">
-                <a href="/practice/${userId}" class="btn btn-primary btn-large">📝 日常练习</a>
-                <a href="/competition/${userId}" class="btn btn-primary btn-large">🏆 对抗竞速</a>
-                <a href="/calendar/${userId}" class="btn btn-secondary btn-large">📅 练习日历</a>
-                <a href="/stats/${userId}" class="btn btn-secondary btn-large">📊 用户统计</a>
+                <a href="/calculate-competition/practice/${userId}" class="btn btn-primary btn-large">📝 日常练习</a>
+                <a href="/calculate-competition/competition/${userId}" class="btn btn-primary btn-large">🏆 对抗竞速</a>
+                <a href="/calculate-competition/calendar/${userId}" class="btn btn-secondary btn-large">📅 练习日历</a>
+                <a href="/calculate-competition/stats/${userId}" class="btn btn-secondary btn-large">📊 用户统计</a>
                 <button class="btn btn-secondary" onclick="this.parentElement.parentElement.parentElement.remove()">取消</button>
             </div>
         </div>

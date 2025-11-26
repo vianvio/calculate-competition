@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const settingsJson = localStorage.getItem('competitionSettings');
     if (!settingsJson) {
         alert('未找到竞速设置');
-        window.location.href = '/';
+        window.location.href = '/calculate-competition';
         return;
     }
     
@@ -75,7 +75,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     } catch (error) {
         console.error('Failed to load competition data:', error);
         alert('加载竞速数据失败');
-        window.location.href = '/';
+        window.location.href = '/calculate-competition';
     }
 });
 
@@ -658,5 +658,5 @@ function showResult(mode, winnerId) {
 }
 
 function playAgain() {
-    window.location.href = `/competition/${settings.player1Id}`;
+    window.location.href = `/calculate-competition/competition/${settings.player1Id}`;
 }

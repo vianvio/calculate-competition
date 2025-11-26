@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>练习日历</title>
-    <link rel="stylesheet" href="/public/css/style.css">
+    <link rel="stylesheet" href="/calculate-competition/css/style.css">
 </head>
 <body class="calendar-page">
     <div class="container">
@@ -31,15 +31,15 @@
         </div>
 
         <div class="button-group">
-            <a href="/" class="btn btn-secondary">返回</a>
-            <a href="/stats/<%= userId %>" class="btn btn-primary">查看统计</a>
+            <a href="/calculate-competition" class="btn btn-secondary">返回</a>
+            <a href="/calculate-competition/stats/<%= userId %>" class="btn btn-primary">查看统计</a>
         </div>
     </div>
 
     <script>
         const userId = <%= userId %>;
     </script>
-    <script src="/public/js/main.js"></script>
-    <script src="/public/js/calendar.js"></script>
+    <script src="/calculate-competition/js/main.js"></script>
+    <script src="/calculate-competition/js/calendar.js"></script>
 </body>
 </html>
