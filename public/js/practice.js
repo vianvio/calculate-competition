@@ -118,15 +118,20 @@ function showQuestion() {
     }
     
     const question = questions[currentQuestionIndex];
-    document.getElementById('questionDisplay').textContent = question.question + ' = ?';
+    const questionTextSpan = document.querySelector('#questionDisplay .question-text');
+    if (questionTextSpan) {
+        questionTextSpan.textContent = question.question + ' = ';
+    }
     
     // Check if this is a division question with remainder
     const isDivisionWithRemainder = question.hasRemainder;
+    const answerInput = document.getElementById('answerInput');
+    const divisionContainer = document.getElementById('divisionAnswerContainer');
     
     if (isDivisionWithRemainder) {
         // Show division inputs (quotient and remainder)
-        document.getElementById('normalAnswerContainer').style.display = 'none';
-        document.getElementById('divisionAnswerContainer').style.display = 'block';
+        answerInput.style.display = 'none';
+        divisionContainer.style.display = 'inline-flex';
         const quotientInput = document.getElementById('quotientInput');
         const remainderInput = document.getElementById('remainderInput');
         quotientInput.value = '';
@@ -144,10 +149,10 @@ function showQuestion() {
         lastFocusedInput = 'quotient';
     } else {
         // Show normal input
-        document.getElementById('normalAnswerContainer').style.display = 'block';
-        document.getElementById('divisionAnswerContainer').style.display = 'none';
-        document.getElementById('answerInput').value = '';
-        document.getElementById('answerInput').focus();
+        answerInput.style.display = 'inline-block';
+        divisionContainer.style.display = 'none';
+        answerInput.value = '';
+        answerInput.focus();
         lastFocusedInput = null;
     }
     

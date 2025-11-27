@@ -31,23 +31,17 @@
                 
                 <div class="question-container">
                     <div class="progress" id="progress1">1 / 10</div>
-                    <div class="question-display" id="question1">2 + 3 = ?</div>
-                    
-                    <!-- Normal answer input -->
-                    <div id="normalAnswerContainer1" style="display: block;">
-                        <input type="tel" id="answer1" class="answer-input" placeholder="答案">
-                    </div>
-                    
-                    <!-- Division with remainder inputs -->
-                    <div id="divisionAnswerContainer1" class="division-inputs" style="display: none;">
-                        <div class="division-input-group">
-                            <label>商</label>
-                            <input type="tel" id="quotient1" class="answer-input-small" placeholder="商">
-                        </div>
-                        <div class="division-input-group">
-                            <label>余数</label>
-                            <input type="tel" id="remainder1" class="answer-input-small" placeholder="余数">
-                        </div>
+                    <div class="question-display" id="question1">
+                        <span class="question-text">2 + 3 = </span>
+                        <!-- Normal answer input -->
+                        <input type="tel" id="answer1" class="answer-input-inline" placeholder="?" style="display: inline-block;">
+                        
+                        <!-- Division with remainder inputs -->
+                        <span id="divisionAnswerContainer1" class="division-inputs-inline" style="display: none;">
+                            <input type="tel" id="quotient1" class="answer-input-inline-small" placeholder="商">
+                            <span style="color: var(--primary-color)"> ... </span>
+                            <input type="tel" id="remainder1" class="answer-input-inline-small" placeholder="余数">
+                        </span>
                     </div>
                 </div>
                 
@@ -81,23 +75,17 @@
                 
                 <div class="question-container">
                     <div class="progress" id="progress2">1 / 10</div>
-                    <div class="question-display" id="question2">2 + 3 = ?</div>
-                    
-                    <!-- Normal answer input -->
-                    <div id="normalAnswerContainer2" style="display: block;">
-                        <input type="tel" id="answer2" class="answer-input" placeholder="答案">
-                    </div>
-                    
-                    <!-- Division with remainder inputs -->
-                    <div id="divisionAnswerContainer2" class="division-inputs" style="display: none;">
-                        <div class="division-input-group">
-                            <label>商</label>
-                            <input type="tel" id="quotient2" class="answer-input-small" placeholder="商">
-                        </div>
-                        <div class="division-input-group">
-                            <label>余数</label>
-                            <input type="tel" id="remainder2" class="answer-input-small" placeholder="余数">
-                        </div>
+                    <div class="question-display" id="question2">
+                        <span class="question-text">2 + 3 = </span>
+                        <!-- Normal answer input -->
+                        <input type="tel" id="answer2" class="answer-input-inline" placeholder="?" style="display: inline-block;">
+                        
+                        <!-- Division with remainder inputs -->
+                        <span id="divisionAnswerContainer2" class="division-inputs-inline" style="display: none;">
+                            <input type="tel" id="quotient2" class="answer-input-inline-small" placeholder="商">
+                            <span style="color: var(--primary-color)"> ... </span>
+                            <input type="tel" id="remainder2" class="answer-input-inline-small" placeholder="余数">
+                        </span>
                     </div>
                 </div>
                 
@@ -131,23 +119,17 @@
                 </div>
                 
                 <div class="question-container">
-                    <div class="question-display" id="speedQuestion1">2 + 3 = ?</div>
-                    
-                    <!-- Normal answer input -->
-                    <div id="speedNormalAnswerContainer1" style="display: block;">
-                        <input type="tel" id="speedAnswer1" class="answer-input" placeholder="答案">
-                    </div>
-                    
-                    <!-- Division with remainder inputs -->
-                    <div id="speedDivisionAnswerContainer1" class="division-inputs" style="display: none;">
-                        <div class="division-input-group">
-                            <label>商</label>
-                            <input type="tel" id="speedQuotient1" class="answer-input-small" placeholder="商">
-                        </div>
-                        <div class="division-input-group">
-                            <label>余数</label>
-                            <input type="tel" id="speedRemainder1" class="answer-input-small" placeholder="余数">
-                        </div>
+                    <div class="question-display" id="speedQuestion1">
+                        <span class="question-text">2 + 3 = </span>
+                        <!-- Normal answer input -->
+                        <input type="tel" id="speedAnswer1" class="answer-input-inline" placeholder="?" style="display: inline-block;">
+                        
+                        <!-- Division with remainder inputs -->
+                        <span id="speedDivisionAnswerContainer1" class="division-inputs-inline" style="display: none;">
+                            <input type="tel" id="speedQuotient1" class="answer-input-inline-small" placeholder="商">
+                            <span style="color: var(--primary-color)"> ... </span>
+                            <input type="tel" id="speedRemainder1" class="answer-input-inline-small" placeholder="余数">
+                        </span>
                     </div>
                 </div>
                 
@@ -176,23 +158,17 @@
                 </div>
                 
                 <div class="question-container">
-                    <div class="question-display" id="speedQuestion2">2 + 3 = ?</div>
-                    
-                    <!-- Normal answer input -->
-                    <div id="speedNormalAnswerContainer2" style="display: block;">
-                        <input type="tel" id="speedAnswer2" class="answer-input" placeholder="答案">
-                    </div>
-                    
-                    <!-- Division with remainder inputs -->
-                    <div id="speedDivisionAnswerContainer2" class="division-inputs" style="display: none;">
-                        <div class="division-input-group">
-                            <label>商</label>
-                            <input type="tel" id="speedQuotient2" class="answer-input-small" placeholder="商">
-                        </div>
-                        <div class="division-input-group">
-                            <label>余数</label>
-                            <input type="tel" id="speedRemainder2" class="answer-input-small" placeholder="余数">
-                        </div>
+                    <div class="question-display" id="speedQuestion2">
+                        <span class="question-text">2 + 3 = </span>
+                        <!-- Normal answer input -->
+                        <input type="tel" id="speedAnswer2" class="answer-input-inline" placeholder="?" style="display: inline-block;">
+                        
+                        <!-- Division with remainder inputs -->
+                        <span id="speedDivisionAnswerContainer2" class="division-inputs-inline" style="display: none;">
+                            <input type="tel" id="speedQuotient2" class="answer-input-inline-small" placeholder="商">
+                            <span style="color: var(--primary-color)"> ... </span>
+                            <input type="tel" id="speedRemainder2" class="answer-input-inline-small" placeholder="余数">
+                        </span>
                     </div>
                 </div>
                 

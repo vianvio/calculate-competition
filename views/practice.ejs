@@ -102,21 +102,17 @@
         </div>
 
         <div class="question-container">
-            <div class="question-display" id="questionDisplay">2 + 3 = ?</div>
-            <div id="normalAnswerContainer">
-                <input type="tel" id="answerInput" class="answer-input" placeholder="输入答案" autofocus>
-            </div>
-            <div id="divisionAnswerContainer" style="display: none;">
-                <div class="division-inputs">
-                    <div class="division-input-group">
-                        <label>商：</label>
-                        <input type="tel" id="quotientInput" class="answer-input-small" placeholder="商">
-                    </div>
-                    <div class="division-input-group">
-                        <label>余数：</label>
-                        <input type="tel" id="remainderInput" class="answer-input-small" placeholder="余数">
-                    </div>
-                </div>
+            <div class="question-display" id="questionDisplay">
+                <span class="question-text">2 + 3 = </span>
+                <!-- Normal answer input -->
+                <input type="tel" id="answerInput" class="answer-input-inline" placeholder="?" autofocus style="display: inline-block;">
+                
+                <!-- Division with remainder inputs -->
+                <span id="divisionAnswerContainer" class="division-inputs-inline" style="display: none;">
+                    <input type="tel" id="quotientInput" class="answer-input-inline-small" placeholder="商">
+                    <span style="color: var(--primary-color)"> ... </span>
+                    <input type="tel" id="remainderInput" class="answer-input-inline-small" placeholder="余数">
+                </span>
             </div>
         </div>
 

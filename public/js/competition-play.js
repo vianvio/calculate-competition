@@ -139,15 +139,20 @@ function showQuestionAccuracy(player) {
     }
     
     const question = questions[state.currentIndex];
-    document.getElementById(`question${player}`).textContent = question.question + ' = ?';
+    const questionTextSpan = document.querySelector(`#question${player} .question-text`);
+    if (questionTextSpan) {
+        questionTextSpan.textContent = question.question + ' = ';
+    }
     
     // Check if this is a division question with remainder
     const isDivisionWithRemainder = question.hasRemainder;
+    const answerInput = document.getElementById(`answer${player}`);
+    const divisionContainer = document.getElementById(`divisionAnswerContainer${player}`);
     
     if (isDivisionWithRemainder) {
         // Show division inputs (quotient and remainder)
-        document.getElementById(`normalAnswerContainer${player}`).style.display = 'none';
-        document.getElementById(`divisionAnswerContainer${player}`).style.display = 'block';
+        answerInput.style.display = 'none';
+        divisionContainer.style.display = 'inline-flex';
         const quotientInput = document.getElementById(`quotient${player}`);
         const remainderInput = document.getElementById(`remainder${player}`);
         quotientInput.value = '';
@@ -180,9 +185,9 @@ function showQuestionAccuracy(player) {
         lastFocusedInput[focusKey] = 'quotient';
     } else {
         // Show normal input
-        document.getElementById(`normalAnswerContainer${player}`).style.display = 'block';
-        document.getElementById(`divisionAnswerContainer${player}`).style.display = 'none';
-        document.getElementById(`answer${player}`).value = '';
+        answerInput.style.display = 'inline-block';
+        divisionContainer.style.display = 'none';
+        answerInput.value = '';
         lastFocusedInput[`player${player}`] = null;
     }
     
@@ -404,16 +409,22 @@ function showQuestionSpeed() {
     speedState.currentQuestion = questions[speedState.questionIndex];
     const question = speedState.currentQuestion;
     
-    document.getElementById('speedQuestion1').textContent = question.question + ' = ?';
-    document.getElementById('speedQuestion2').textContent = question.question + ' = ?';
+    // Update question text for both players
+    const questionTextSpan1 = document.querySelector('#speedQuestion1 .question-text');
+    const questionTextSpan2 = document.querySelector('#speedQuestion2 .question-text');
+    if (questionTextSpan1) questionTextSpan1.textContent = question.question + ' = ';
+    if (questionTextSpan2) questionTextSpan2.textContent = question.question + ' = ';
     
     // Check if this is a division question with remainder
     const isDivisionWithRemainder = question.hasRemainder;
     
     // Setup for Player 1
+    const answerInput1 = document.getElementById('speedAnswer1');
+    const divisionContainer1 = document.getElementById('speedDivisionAnswerContainer1');
+    
     if (isDivisionWithRemainder) {
-        document.getElementById('speedNormalAnswerContainer1').style.display = 'none';
-        document.getElementById('speedDivisionAnswerContainer1').style.display = 'flex';
+        answerInput1.style.display = 'none';
+        divisionContainer1.style.display = 'inline-flex';
         const quotientInput1 = document.getElementById('speedQuotient1');
         const remainderInput1 = document.getElementById('speedRemainder1');
         quotientInput1.value = '';
@@ -443,16 +454,19 @@ function showQuestionSpeed() {
         quotientInput1.focus();
         lastFocusedInput.speed1 = 'quotient';
     } else {
-        document.getElementById('speedNormalAnswerContainer1').style.display = 'block';
-        document.getElementById('speedDivisionAnswerContainer1').style.display = 'none';
-        document.getElementById('speedAnswer1').value = '';
+        answerInput1.style.display = 'inline-block';
+        divisionContainer1.style.display = 'none';
+        answerInput1.value = '';
         lastFocusedInput.speed1 = null;
     }
     
     // Setup for Player 2
+    const answerInput2 = document.getElementById('speedAnswer2');
+    const divisionContainer2 = document.getElementById('speedDivisionAnswerContainer2');
+    
     if (isDivisionWithRemainder) {
-        document.getElementById('speedNormalAnswerContainer2').style.display = 'none';
-        document.getElementById('speedDivisionAnswerContainer2').style.display = 'flex';
+        answerInput2.style.display = 'none';
+        divisionContainer2.style.display = 'inline-flex';
         const quotientInput2 = document.getElementById('speedQuotient2');
         const remainderInput2 = document.getElementById('speedRemainder2');
         quotientInput2.value = '';
@@ -481,9 +495,9 @@ function showQuestionSpeed() {
         
         lastFocusedInput.speed2 = 'quotient';
     } else {
-        document.getElementById('speedNormalAnswerContainer2').style.display = 'block';
-        document.getElementById('speedDivisionAnswerContainer2').style.display = 'none';
-        document.getElementById('speedAnswer2').value = '';
+        answerInput2.style.display = 'inline-block';
+        divisionContainer2.style.display = 'none';
+        answerInput2.value = '';
         lastFocusedInput.speed2 = null;
     }
     

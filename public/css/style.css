@@ -39,12 +39,6 @@ input[type="number"] {
     caret-color: transparent;
 }
 
-/* Prevent iOS zoom on input focus */
-input[type="tel"]:focus,
-input[type="number"]:focus {
-    font-size: 16px !important;
-}
-
 .container {
     max-width: 1200px;
     margin: 0 auto;
@@ -608,6 +602,67 @@ select.input-medium {
     outline: none;
 }
 
+/* Inline Answer Inputs */
+.answer-input-inline {
+    width: 200px;
+    padding: 10px 15px;
+    font-size: 60px;
+    text-align: center;
+    border: none;
+    border-bottom: 4px solid var(--primary-color);
+    background: var(--bg-light);
+    border-radius: 5px;
+    outline: none;
+    font-weight: bold;
+    color: var(--primary-color);
+    vertical-align: middle;
+    margin: 0 5px;
+}
+
+.answer-input-inline:focus {
+    background: var(--bg-light);
+    border-bottom-color: var(--success-color);
+}
+
+.answer-input-inline-small {
+    width: 150px;
+    padding: 8px 10px;
+    font-size: 48px;
+    text-align: center;
+    border: none;
+    border-bottom: 4px solid var(--primary-color);
+    background: var(--bg-light);
+    border-radius: 5px;
+    outline: none;
+    font-weight: bold;
+    color: var(--primary-color);
+    vertical-align: middle;
+    margin: 0 5px;
+}
+
+.answer-input-inline-small:focus {
+    background: var(--bg-light);
+    border-bottom-color: var(--success-color);
+}
+
+.division-inputs-inline {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    vertical-align: middle;
+}
+
+.division-inputs-inline span {
+    font-size: 48px;
+    color: var(--text-light);
+}
+
+.question-text {
+    font-size: inherit;
+    font-weight: inherit;
+    color: inherit;
+}
+
 /* Number Pad */
 .number-pad {
     display: grid;
@@ -1113,6 +1168,22 @@ select.input-medium {
     .answer-input {
         width: 100%;
         font-size: 36px;
+    }
+    
+    .answer-input-inline {
+        width: 150px;
+        font-size: 40px;
+        padding: 8px 12px;
+    }
+    
+    .answer-input-inline-small {
+        width: 80px;
+        font-size: 32px;
+        padding: 6px 8px;
+    }
+    
+    .division-inputs-inline span {
+        font-size: 32px;
     }
     
     .number-pad {
