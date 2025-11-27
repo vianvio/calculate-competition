@@ -1,4 +1,4 @@
-const CACHE_NAME = 'calculate-competition-v2';
+const CACHE_NAME = 'calculate-competition-v3';
 const BASE_PATH = '/calculate-competition';
 
 const urlsToCache = [
