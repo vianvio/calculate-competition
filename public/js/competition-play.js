@@ -229,6 +229,8 @@ function inputNumber(player, num) {
 function clearInput(player) {
     const state = player === 1 ? player1State : player2State;
     const question = questions[state.currentIndex];
+    const directionKey = `player${player}`;
+    const direction = inputDirection[directionKey];
     
     if (question && question.hasRemainder) {
         const quotientInput = document.getElementById(`quotient${player}`);
@@ -236,12 +238,31 @@ function clearInput(player) {
         const focusKey = `player${player}`;
         
         if (lastFocusedInput[focusKey] === 'remainder') {
-            remainderInput.value = '';
+            if (direction === 'rtl') {
+                // RTL: Remove first character
+                remainderInput.value = remainderInput.value.slice(1);
+            } else {
+                // LTR: Remove last character
+                remainderInput.value = remainderInput.value.slice(0, -1);
+            }
         } else {
-            quotientInput.value = '';
+            if (direction === 'rtl') {
+                // RTL: Remove first character
+                quotientInput.value = quotientInput.value.slice(1);
+            } else {
+                // LTR: Remove last character
+                quotientInput.value = quotientInput.value.slice(0, -1);
+            }
         }
     } else {
-        document.getElementById(`answer${player}`).value = '';
+        const input = document.getElementById(`answer${player}`);
+        if (direction === 'rtl') {
+            // RTL: Remove first character
+            input.value = input.value.slice(1);
+        } else {
+            // LTR: Remove last character
+            input.value = input.value.slice(0, -1);
+        }
     }
 }
 
@@ -506,6 +527,8 @@ function inputNumberSpeed(player, num) {
 
 function clearInputSpeed(player) {
     const question = speedState.currentQuestion;
+    const directionKey = `speed${player}`;
+    const direction = inputDirection[directionKey];
     
     if (question && question.hasRemainder) {
         const quotientInput = document.getElementById(`speedQuotient${player}`);
@@ -513,12 +536,31 @@ function clearInputSpeed(player) {
         const focusKey = `speed${player}`;
         
         if (lastFocusedInput[focusKey] === 'remainder') {
-            remainderInput.value = '';
+            if (direction === 'rtl') {
+                // RTL: Remove first character
+                remainderInput.value = remainderInput.value.slice(1);
+            } else {
+                // LTR: Remove last character
+                remainderInput.value = remainderInput.value.slice(0, -1);
+            }
         } else {
-            quotientInput.value = '';
+            if (direction === 'rtl') {
+                // RTL: Remove first character
+                quotientInput.value = quotientInput.value.slice(1);
+            } else {
+                // LTR: Remove last character
+                quotientInput.value = quotientInput.value.slice(0, -1);
+            }
         }
     } else {
-        document.getElementById(`speedAnswer${player}`).value = '';
+        const input = document.getElementById(`speedAnswer${player}`);
+        if (direction === 'rtl') {
+            // RTL: Remove first character
+            input.value = input.value.slice(1);
+        } else {
+            // LTR: Remove last character
+            input.value = input.value.slice(0, -1);
+        }
     }
 }
 

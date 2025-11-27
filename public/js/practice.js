@@ -195,17 +195,36 @@ function inputNumber(num) {
 function clearInput() {
     const question = questions[currentQuestionIndex];
     if (question && question.hasRemainder) {
-        // Clear the focused field
+        // Delete one digit from the focused field
         const quotientInput = document.getElementById('quotientInput');
         const remainderInput = document.getElementById('remainderInput');
         
         if (lastFocusedInput === 'remainder') {
-            remainderInput.value = '';
+            if (inputDirection === 'rtl') {
+                // RTL: Remove first character
+                remainderInput.value = remainderInput.value.slice(1);
+            } else {
+                // LTR: Remove last character
+                remainderInput.value = remainderInput.value.slice(0, -1);
+            }
         } else {
-            quotientInput.value = '';
+            if (inputDirection === 'rtl') {
+                // RTL: Remove first character
+                quotientInput.value = quotientInput.value.slice(1);
+            } else {
+                // LTR: Remove last character
+                quotientInput.value = quotientInput.value.slice(0, -1);
+            }
         }
     } else {
-        document.getElementById('answerInput').value = '';
+        const input = document.getElementById('answerInput');
+        if (inputDirection === 'rtl') {
+            // RTL: Remove first character
+            input.value = input.value.slice(1);
+        } else {
+            // LTR: Remove last character
+            input.value = input.value.slice(0, -1);
+        }
     }
 }
 
