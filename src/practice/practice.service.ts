@@ -124,10 +124,15 @@ export class PracticeService {
       },
     });
 
-    // Group by date
+    // Group by date (using local timezone)
     const calendar = {};
     sessions.forEach(session => {
-      const date = session.createdAt.toISOString().split('T')[0];
+      // Use local date formatting (will respect TZ environment variable)
+      const year = session.createdAt.getFullYear();
+      const month = String(session.createdAt.getMonth() + 1).padStart(2, '0');
+      const day = String(session.createdAt.getDate()).padStart(2, '0');
+      const date = `${year}-${month}-${day}`;
+      
       if (!calendar[date]) {
         calendar[date] = {
           totalQuestions: 0,

@@ -2,6 +2,8 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    touch-action: manipulation;
+    -ms-touch-action: manipulation;
 }
 
 :root {
@@ -25,6 +27,24 @@ body {
     color: var(--text-dark);
     -webkit-tap-highlight-color: transparent;
     user-select: none;
+    touch-action: manipulation;
+    -webkit-text-size-adjust: 100%;
+}
+
+/* Disable default keyboard on all input fields */
+input[type="text"],
+input[type="tel"],
+input[type="number"] {
+    -webkit-user-select: none;
+    user-select: none;
+    caret-color: transparent;
+}
+
+/* Prevent iOS zoom on input focus */
+input[type="text"]:focus,
+input[type="tel"]:focus,
+input[type="number"]:focus {
+    font-size: 16px !important;
 }
 
 .container {
