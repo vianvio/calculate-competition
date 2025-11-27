@@ -4,6 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>数学练习 - <%= title || '口算练习' %></title>
+    
+    <!-- PWA Meta Tags -->
+    <meta name="description" content="小学生数学口算练习应用，支持加减乘除和竞赛模式">
+    <meta name="theme-color" content="#667eea">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="口算练习">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/calculate-competition/manifest.json">
+    
+    <!-- Apple Touch Icons -->
+    <link rel="apple-touch-icon" href="/calculate-competition/icons/icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/calculate-competition/icons/icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="96x96" href="/calculate-competition/icons/icon-96x96.png">
+    <link rel="apple-touch-icon" sizes="128x128" href="/calculate-competition/icons/icon-128x128.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/calculate-competition/icons/icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/calculate-competition/icons/icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="192x192" href="/calculate-competition/icons/icon-192x192.png">
+    <link rel="apple-touch-icon" sizes="384x384" href="/calculate-competition/icons/icon-384x384.png">
+    <link rel="apple-touch-icon" sizes="512x512" href="/calculate-competition/icons/icon-512x512.png">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/calculate-competition/icons/icon-72x72.png">
+    
     <link rel="stylesheet" href="/calculate-competition/css/style.css">
     <script>
         // Globally disable keyboard on input fields
@@ -18,5 +43,6 @@
 <body>
     <%- body %>
     <script src="/calculate-competition/js/main.js"></script>
+    <script src="/calculate-competition/js/pwa-install.js"></script>
 </body>
 </html>

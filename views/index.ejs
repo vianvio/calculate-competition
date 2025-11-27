@@ -2,14 +2,45 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>选择用户</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>选择用户 - 数学口算练习</title>
+    
+    <!-- PWA Meta Tags -->
+    <meta name="description" content="小学生数学口算练习应用，支持加减乘除和竞赛模式">
+    <meta name="theme-color" content="#667eea">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="口算练习">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/calculate-competition/manifest.json">
+    
+    <!-- Apple Touch Icons -->
+    <link rel="apple-touch-icon" href="/calculate-competition/icons/icon-152x152.png">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/calculate-competition/icons/icon-72x72.png">
+    
     <link rel="stylesheet" href="/calculate-competition/css/style.css">
+    <script>
+        // Globally disable keyboard on input fields
+        document.addEventListener('focusin', function(e) {
+            if (e.target.matches('input[type="text"], input[type="tel"], input[type="number"]')) {
+                e.target.readOnly = true;
+                e.target.inputMode = 'none';
+            }
+        });
+    </script>
 </head>
 <body class="select-user-page">
     <div class="container">
         <h1>🎓 数学口算练习</h1>
         <h2>选择用户</h2>
+        
+        <!-- PWA Install Button -->
+        <button id="installPWA" class="btn btn-install" onclick="installPWA()" style="display: none;">
+            📱 安装到主屏幕
+        </button>
         
         <div id="userList" class="user-grid"></div>
         
@@ -31,6 +62,7 @@
     </div>
 
     <script src="/calculate-competition/js/main.js"></script>
+    <script src="/calculate-competition/js/pwa-install.js"></script>
     <script src="/calculate-competition/js/select-user.js"></script>
 </body>
 </html>

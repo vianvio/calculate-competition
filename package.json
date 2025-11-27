@@ -2,14 +2,19 @@
   "name": "calculate-competition",
   "version": "1.0.0",
   "description": "Elementary school math practice application with daily practice and competition modes",
-  "main": "dist/main.js",
+  "main": "dist/src/main.js",
   "scripts": {
     "build": "tsc",
-    "start": "node dist/main.js",
+    "start": "node dist/src/main.js",
     "dev": "ts-node src/main.ts",
     "start:dev": "ts-node src/main.ts"
   },
-  "keywords": ["math", "education", "practice", "nestjs"],
+  "keywords": [
+    "math",
+    "education",
+    "practice",
+    "nestjs"
+  ],
   "author": "",
   "license": "ISC",
   "dependencies": {
@@ -29,6 +34,7 @@
   "devDependencies": {
     "@nestjs/cli": "^11.0.12",
     "@types/node": "^24.10.1",
+    "sharp": "^0.34.5",
     "ts-node": "^10.9.2",
     "tsconfig-paths": "^4.2.0",
     "typescript": "^5.9.3"
