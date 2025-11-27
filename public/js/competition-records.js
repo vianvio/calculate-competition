@@ -26,6 +26,11 @@ function renderRecords() {
         const myScore = isPlayer1 ? record.player1Score : record.player2Score;
         const opponentScore = isPlayer1 ? record.player2Score : record.player1Score;
         
+        // 对手头像显示
+        const opponentAvatar = opponent.avatar 
+            ? `<img src="/calculate-competition/avatar/${opponent.avatar}" style="width: 24px; height: 24px; border-radius: 50%; vertical-align: middle; margin: 0 5px;" alt="avatar">`
+            : '👤';
+        
         const recordItem = document.createElement('div');
         recordItem.className = 'record-item';
         recordItem.style.borderLeft = isWinner ? '5px solid #4CAF50' : '5px solid #f44336';
@@ -34,7 +39,7 @@ function renderRecords() {
             <div class="record-info">
                 <div class="record-players">
                     ${isWinner ? '🏆' : '❌'} 
-                    VS ${opponent.avatar || '👤'} ${opponent.name}
+                    VS ${opponentAvatar} ${opponent.name}
                 </div>
                 <div class="record-details">
                     模式: ${record.mode === 'accuracy' ? '准确率' : '竞速抢答'} | 

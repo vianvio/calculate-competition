@@ -14,9 +14,15 @@ function renderStats() {
     if (!userData) return;
     
     const userInfo = document.getElementById('userInfo');
+    
+    // 根据头像类型显示图片或默认 emoji
+    const avatarDisplay = userData.user.avatar 
+        ? `<img src="/calculate-competition/avatar/${userData.user.avatar}" class="avatar-img" style="width: 120px; height: 120px; margin: 0 auto;" alt="avatar">`
+        : '<div style="font-size: 80px;">👤</div>';
+    
     userInfo.innerHTML = `
-        <div style="font-size: 48px; margin-bottom: 15px;">${userData.user.avatar || '👤'}</div>
-        <div style="font-size: 32px; font-weight: bold;">${userData.user.name}</div>
+        ${avatarDisplay}
+        <div style="font-size: 32px; font-weight: bold; margin-top: 15px;">${userData.user.name}</div>
     `;
     
     document.getElementById('totalProblems').textContent = userData.stats.totalProblems;

@@ -19,14 +19,27 @@ function populateUserSelects() {
     users.forEach(user => {
         const option1 = document.createElement('option');
         option1.value = user.id;
-        option1.textContent = `${user.avatar || '👤'} ${user.name}`;
+        // 对于 select option，保持使用 emoji 或文本，因为 option 标签不支持 HTML
+        option1.textContent = user.name;
         player1Select.appendChild(option1);
         
         const option2 = document.createElement('option');
         option2.value = user.id;
-        option2.textContent = `${user.avatar || '👤'} ${user.name}`;
+        option2.textContent = user.name;
         player2Select.appendChild(option2);
     });
+}
+
+function adjustQuestionCount(change) {
+    const input = document.getElementById('questionCount');
+    const currentValue = parseInt(input.value) || 10;
+    const newValue = currentValue + change;
+    const min = parseInt(input.min) || 5;
+    const max = parseInt(input.max) || 50;
+    
+    if (newValue >= min && newValue <= max) {
+        input.value = newValue;
+    }
 }
 
 function startCompetition() {

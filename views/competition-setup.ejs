@@ -30,18 +30,38 @@
             </div>
 
             <div class="setting-group">
-                <label>计算类型</label>
-                <div class="checkbox-group">
-                    <label><input type="checkbox" name="calculationType" value="addition" checked> ➕ 加法</label>
-                    <label><input type="checkbox" name="calculationType" value="subtraction"> ➖ 减法</label>
-                    <label><input type="checkbox" name="calculationType" value="multiplication"> ✖️ 乘法</label>
-                    <label><input type="checkbox" name="calculationType" value="division"> ➗ 除法</label>
+                    <label>计算类型</label>
+                    <div class="calculation-types">
+                        <label class="calc-type-card">
+                            <input type="checkbox" name="calculationType" value="addition" checked>
+                            <span class="calc-icon">➕</span>
+                            <span class="calc-name">加法</span>
+                        </label>
+                        <label class="calc-type-card">
+                            <input type="checkbox" name="calculationType" value="subtraction">
+                            <span class="calc-icon">➖</span>
+                            <span class="calc-name">减法</span>
+                        </label>
+                        <label class="calc-type-card">
+                            <input type="checkbox" name="calculationType" value="multiplication">
+                            <span class="calc-icon">✖️</span>
+                            <span class="calc-name">乘法</span>
+                        </label>
+                        <label class="calc-type-card">
+                            <input type="checkbox" name="calculationType" value="division">
+                            <span class="calc-icon">➗</span>
+                            <span class="calc-name">除法</span>
+                        </label>
+                    </div>
                 </div>
-            </div>
 
             <div class="setting-group">
                 <label>习题数量</label>
-                <input type="number" id="questionCount" value="10" min="5" max="50" class="input-medium">
+                <div class="number-control">
+                    <button type="button" class="btn-control" onclick="adjustQuestionCount(-1)">-1</button>
+                    <input type="number" id="questionCount" value="10" min="5" max="50" class="input-medium">
+                    <button type="button" class="btn-control" onclick="adjustQuestionCount(1)">+1</button>
+                </div>
             </div>
 
             <div class="setting-group">
@@ -54,12 +74,15 @@
             </div>
 
             <div class="setting-group">
-                <label><input type="checkbox" id="hasRemainder"> 除法有余数</label>
+                <label class="checkbox-card">
+                    <input type="checkbox" id="hasRemainder">
+                    <span class="checkbox-label">除法有余数</span>
+                </label>
             </div>
         </div>
 
         <div class="button-group">
-            <a href="/calculate-competition" class="btn btn-secondary">返回</a>
+            <a href="/calculate-competition" class="btn btn-secondary btn-large">返回</a>
             <button class="btn btn-primary btn-large" onclick="startCompetition()">开始竞速</button>
         </div>
     </div>

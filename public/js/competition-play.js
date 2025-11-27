@@ -105,9 +105,16 @@ function showReadyAnimation() {
 function startAccuracyMode() {
     document.getElementById('accuracyScreen').classList.add('active');
     
-    // Set player info
-    document.getElementById('player1Info').innerHTML = `${player1Data.avatar || '👤'} ${player1Data.name}`;
-    document.getElementById('player2Info').innerHTML = `${player2Data.avatar || '👤'} ${player2Data.name}`;
+    // Set player info with avatar images
+    const player1Avatar = player1Data.avatar 
+        ? `<img src="/calculate-competition/avatar/${player1Data.avatar}" style="width: 30px; height: 30px; border-radius: 50%; vertical-align: middle; margin-right: 5px;" alt="avatar">`
+        : '👤';
+    const player2Avatar = player2Data.avatar 
+        ? `<img src="/calculate-competition/avatar/${player2Data.avatar}" style="width: 30px; height: 30px; border-radius: 50%; vertical-align: middle; margin-right: 5px;" alt="avatar">`
+        : '👤';
+    
+    document.getElementById('player1Info').innerHTML = `${player1Avatar} ${player1Data.name}`;
+    document.getElementById('player2Info').innerHTML = `${player2Avatar} ${player2Data.name}`;
     
     player1State.startTime = Date.now();
     player2State.startTime = Date.now();
@@ -353,9 +360,16 @@ async function finishAccuracyMode() {
 function startSpeedMode() {
     document.getElementById('speedScreen').classList.add('active');
     
-    // Set player info
-    document.getElementById('speedPlayer1Info').innerHTML = `${player1Data.avatar || '👤'} ${player1Data.name}`;
-    document.getElementById('speedPlayer2Info').innerHTML = `${player2Data.avatar || '👤'} ${player2Data.name}`;
+    // Set player info with avatar images
+    const player1Avatar = player1Data.avatar 
+        ? `<img src="/calculate-competition/avatar/${player1Data.avatar}" style="width: 30px; height: 30px; border-radius: 50%; vertical-align: middle; margin-right: 5px;" alt="avatar">`
+        : '👤';
+    const player2Avatar = player2Data.avatar 
+        ? `<img src="/calculate-competition/avatar/${player2Data.avatar}" style="width: 30px; height: 30px; border-radius: 50%; vertical-align: middle; margin-right: 5px;" alt="avatar">`
+        : '👤';
+    
+    document.getElementById('speedPlayer1Info').innerHTML = `${player1Avatar} ${player1Data.name}`;
+    document.getElementById('speedPlayer2Info').innerHTML = `${player2Avatar} ${player2Data.name}`;
     
     showQuestionSpeed();
 }
@@ -611,10 +625,23 @@ function showResult(mode, winnerId) {
     document.getElementById('speedScreen').classList.remove('active');
     document.getElementById('resultScreen').classList.add('active');
     
-    // Set player info
-    document.getElementById('resultAvatar1').textContent = player1Data.avatar || '👤';
+    // Set player info with avatar images
+    const resultAvatar1 = document.getElementById('resultAvatar1');
+    const resultAvatar2 = document.getElementById('resultAvatar2');
+    
+    if (player1Data.avatar) {
+        resultAvatar1.innerHTML = `<img src="/calculate-competition/avatar/${player1Data.avatar}" style="width: 60px; height: 60px; border-radius: 50%;" alt="avatar">`;
+    } else {
+        resultAvatar1.textContent = '👤';
+    }
+    
+    if (player2Data.avatar) {
+        resultAvatar2.innerHTML = `<img src="/calculate-competition/avatar/${player2Data.avatar}" style="width: 60px; height: 60px; border-radius: 50%;" alt="avatar">`;
+    } else {
+        resultAvatar2.textContent = '👤';
+    }
+    
     document.getElementById('resultName1').textContent = player1Data.name;
-    document.getElementById('resultAvatar2').textContent = player2Data.avatar || '👤';
     document.getElementById('resultName2').textContent = player2Data.name;
     
     // Set stats
