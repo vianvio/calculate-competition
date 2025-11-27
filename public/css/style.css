@@ -692,6 +692,40 @@ select.input-medium {
     border-radius: 15px;
 }
 
+.stats-filter {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    padding: 12px 30px;
+    font-size: 18px;
+    font-weight: 600;
+    border: 2px solid var(--border-color);
+    border-radius: 25px;
+    background: white;
+    color: var(--text-dark);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+}
+
+.filter-btn:hover {
+    border-color: var(--primary-color);
+    background: rgba(76, 175, 80, 0.1);
+    transform: translateY(-2px);
+}
+
+.filter-btn.active {
+    background: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+    box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
+}
+
 .stats-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -1125,6 +1159,16 @@ select.input-medium {
     .stats-grid {
         grid-template-columns: 1fr;
         gap: 15px;
+    }
+    
+    .stats-filter {
+        gap: 8px;
+        padding: 0 5px;
+    }
+    
+    .filter-btn {
+        padding: 8px 16px;
+        font-size: 14px;
     }
     
     .stat-card {

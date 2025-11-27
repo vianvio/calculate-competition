@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Param, Delete, Patch } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Delete, Patch, Query } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 
@@ -22,8 +22,8 @@ export class UsersController {
   }
 
   @Get(':id/stats')
-  getStats(@Param('id') id: string) {
-    return this.usersService.getStats(+id);
+  getStats(@Param('id') id: string, @Query('filter') filter?: string) {
+    return this.usersService.getStats(+id, filter);
   }
 
   @Patch(':id/avatar')

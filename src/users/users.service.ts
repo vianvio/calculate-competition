@@ -26,7 +26,7 @@ export class UsersService {
     return this.usersRepository.findOne({ where: { id } });
   }
 
-  async getStats(id: number) {
+  async getStats(id: number, filter?: string) {
     const user = await this.usersRepository.findOne({
       where: { id },
       relations: ['practiceSessions', 'competitionsAsPlayer1', 'competitionsAsPlayer2'],
@@ -36,9 +36,64 @@ export class UsersService {
       return null;
     }
 
+    // 根据filter过滤数据
+    let filteredPracticeSessions = user.practiceSessions;
+    let filteredCompetitions = [...user.competitionsAsPlayer1, ...user.competitionsAsPlayer2];
+    
+    if (filter === 'week' || filter === 'month' || filter === 'lastWeek' || filter === 'lastMonth') {
+      const now = new Date();
+      let startDate: Date;
+      let endDate: Date;
+      
+      if (filter === 'week') {
+        // 本周：从周一开始
+        startDate = new Date(now);
+        const day = startDate.getDay();
+        const diff = day === 0 ? -6 : 1 - day; // 如果是周日，往前6天；否则往前到周一
+        startDate.setDate(startDate.getDate() + diff);
+        startDate.setHours(0, 0, 0, 0);
+        endDate = new Date(now);
+        endDate.setHours(23, 59, 59, 999);
+      } else if (filter === 'lastWeek') {
+        // 上周：上周一到上周日
+        const today = new Date(now);
+        const day = today.getDay();
+        const diff = day === 0 ? -6 : 1 - day;
+        const thisMonday = new Date(today);
+        thisMonday.setDate(today.getDate() + diff);
+        
+        startDate = new Date(thisMonday);
+        startDate.setDate(thisMonday.getDate() - 7);
+        startDate.setHours(0, 0, 0, 0);
+        
+        endDate = new Date(thisMonday);
+        endDate.setDate(thisMonday.getDate() - 1);
+        endDate.setHours(23, 59, 59, 999);
+      } else if (filter === 'month') {
+        // 本月：从1号开始
+        startDate = new Date(now.getFullYear(), now.getMonth(), 1);
+        endDate = new Date(now);
+        endDate.setHours(23, 59, 59, 999);
+      } else if (filter === 'lastMonth') {
+        // 上月：上个月1号到最后一天
+        startDate = new Date(now.getFullYear(), now.getMonth() - 1, 1);
+        startDate.setHours(0, 0, 0, 0);
+        endDate = new Date(now.getFullYear(), now.getMonth(), 0);
+        endDate.setHours(23, 59, 59, 999);
+      }
+      
+      filteredPracticeSessions = user.practiceSessions.filter(session => 
+        session.createdAt >= startDate && session.createdAt <= endDate
+      );
+      
+      filteredCompetitions = filteredCompetitions.filter(comp => 
+        comp.createdAt >= startDate && comp.createdAt <= endDate
+      );
+    }
+
     // Calculate practice stats
-    const totalProblems = user.practiceSessions.reduce((sum, session) => sum + session.totalQuestions, 0);
-    const correctAnswers = user.practiceSessions.reduce((sum, session) => sum + session.correctAnswers, 0);
+    const totalProblems = filteredPracticeSessions.reduce((sum, session) => sum + session.totalQuestions, 0);
+    const correctAnswers = filteredPracticeSessions.reduce((sum, session) => sum + session.correctAnswers, 0);
     const practiceAccuracy = totalProblems > 0 ? (correctAnswers / totalProblems * 100).toFixed(2) : 0;
 
     // 详细统计：按运算类型和位数
@@ -52,7 +107,7 @@ export class UsersService {
     };
 
     // 遍历所有练习记录
-    user.practiceSessions.forEach(session => {
+    filteredPracticeSessions.forEach(session => {
       const digits = session.settings.digits || 2;
       
       session.questions.forEach(q => {
@@ -82,14 +137,13 @@ export class UsersService {
     });
 
     // Calculate competition stats
-    const competitions = [...user.competitionsAsPlayer1, ...user.competitionsAsPlayer2];
-    const wins = competitions.filter(comp => {
+    const wins = filteredCompetitions.filter(comp => {
       if (comp.player1Id === id) {
         return comp.winnerId === id;
       }
       return comp.winnerId === id;
     }).length;
-    const winRate = competitions.length > 0 ? (wins / competitions.length * 100).toFixed(2) : 0;
+    const winRate = filteredCompetitions.length > 0 ? (wins / filteredCompetitions.length * 100).toFixed(2) : 0;
 
     return {
       user,
@@ -97,7 +151,7 @@ export class UsersService {
         totalProblems,
         practiceAccuracy: parseFloat(practiceAccuracy as string),
         competitionWins: wins,
-        competitionTotal: competitions.length,
+        competitionTotal: filteredCompetitions.length,
         winRate: parseFloat(winRate as string),
       },
       detailedStats,

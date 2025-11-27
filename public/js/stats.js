@@ -1,8 +1,13 @@
 let userData = null;
+let currentFilter = 'all';
 
-async function loadStats() {
+async function loadStats(filter = 'all') {
     try {
-        const data = await apiCall(`/api/users/${userId}/stats`);
+        currentFilter = filter;
+        const url = filter === 'all' 
+            ? `/api/users/${userId}/stats` 
+            : `/api/users/${userId}/stats?filter=${filter}`;
+        const data = await apiCall(url);
         userData = data;
         renderStats();
     } catch (error) {
@@ -104,4 +109,17 @@ function renderDetailedStats() {
 
 document.addEventListener('DOMContentLoaded', () => {
     loadStats();
+    
+    // 添加过滤按钮事件监听
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            // 移除所有按钮的active类
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            // 添加当前按钮的active类
+            btn.classList.add('active');
+            // 加载对应过滤条件的数据
+            const filter = btn.getAttribute('data-filter');
+            loadStats(filter);
+        });
+    });
 });
