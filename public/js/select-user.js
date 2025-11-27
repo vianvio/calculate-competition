@@ -23,9 +23,14 @@ function renderUsers() {
         userCard.className = 'user-card';
         userCard.onclick = () => selectUser(user.id);
         
+        const avatarDisplay = user.avatar 
+            ? `<img src="/calculate-competition/avatar/${user.avatar}" class="avatar-img" alt="avatar">`
+            : '<div class="avatar">👤</div>';
+        
         userCard.innerHTML = `
-            <div class="avatar">${user.avatar || '👤'}</div>
+            ${avatarDisplay}
             <div class="name">${user.name}</div>
+            <button class="edit-avatar-btn" onclick="event.stopPropagation(); showAvatarSelector(${user.id}, '${user.avatar || ''}')">✏️</button>
         `;
         
         userList.appendChild(userCard);
@@ -53,12 +58,37 @@ function selectUser(userId) {
 
 function showAddUserModal() {
     document.getElementById('addUserModal').style.display = 'flex';
-    document.getElementById('userName').focus();
+    // 随机选择一个默认头像
+    const randomIndex = Math.floor(Math.random() * availableAvatars.length);
+    selectedNewUserAvatar = availableAvatars[randomIndex];
+    renderNewUserAvatarGrid();
+    
+    const userNameInput = document.getElementById('userName');
+    // 移除所有可能阻止输入的属性和事件监听器
+    userNameInput.removeAttribute('readonly');
+    userNameInput.removeAttribute('disabled');
+    
+    // 移除之前可能添加的事件监听器（通过克隆节点）
+    const newInput = userNameInput.cloneNode(true);
+    userNameInput.parentNode.replaceChild(newInput, userNameInput);
+    
+    // 重新添加 Enter 键监听
+    newInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            addUser();
+        }
+    });
+    
+    // 延迟聚焦以确保键盘能弹出
+    setTimeout(() => {
+        newInput.focus();
+    }, 100);
 }
 
 function hideAddUserModal() {
     document.getElementById('addUserModal').style.display = 'none';
     document.getElementById('userName').value = '';
+    selectedNewUserAvatar = null;
 }
 
 async function addUser() {
@@ -69,12 +99,13 @@ async function addUser() {
         return;
     }
     
+    if (!selectedNewUserAvatar) {
+        alert('请选择头像');
+        return;
+    }
+    
     try {
-        // Generate random avatar emoji
-        const avatars = ['👦', '👧', '🧒', '👨', '👩', '🧑', '👶'];
-        const avatar = avatars[Math.floor(Math.random() * avatars.length)];
-        
-        await apiCall('/api/users', 'POST', { name: userName, avatar });
+        await apiCall('/api/users', 'POST', { name: userName, avatar: selectedNewUserAvatar });
         hideAddUserModal();
         await loadUsers();
     } catch (error) {
@@ -86,13 +117,60 @@ async function addUser() {
 // Handle Enter key in input
 document.addEventListener('DOMContentLoaded', () => {
     loadUsers();
-    
-    const userNameInput = document.getElementById('userName');
-    if (userNameInput) {
-        userNameInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                addUser();
-            }
-        });
-    }
 });
+
+// Avatar selection functionality
+const availableAvatars = ['1.png', '2.png', '3.png', '4.png', '5.png'];
+let selectedNewUserAvatar = null;
+
+function showAvatarSelector(userId, currentAvatar) {
+    const modal = document.createElement('div');
+    modal.className = 'modal avatar-selector-modal';
+    
+    const avatarGrid = availableAvatars.map(avatar => 
+        `<div class="avatar-option ${avatar === currentAvatar ? 'selected' : ''}" 
+              onclick="selectAvatar(${userId}, '${avatar}', this.parentElement.parentElement.parentElement)">
+            <img src="/calculate-competition/avatar/${avatar}" alt="avatar">
+         </div>`
+    ).join('');
+    
+    modal.innerHTML = `
+        <div class="modal-content avatar-selector-content">
+            <h3>选择头像</h3>
+            <div class="avatar-grid">
+                ${avatarGrid}
+            </div>
+            <button class="btn btn-secondary" onclick="this.parentElement.parentElement.remove()">取消</button>
+        </div>
+    `;
+    
+    document.body.appendChild(modal);
+}
+
+function renderNewUserAvatarGrid() {
+    const grid = document.getElementById('newUserAvatarGrid');
+    if (!grid) return;
+    
+    grid.innerHTML = availableAvatars.map(avatar => 
+        `<div class="avatar-option ${avatar === selectedNewUserAvatar ? 'selected' : ''}" 
+              onclick="selectNewUserAvatar('${avatar}')">
+            <img src="/calculate-competition/avatar/${avatar}" alt="avatar">
+         </div>`
+    ).join('');
+}
+
+function selectNewUserAvatar(avatar) {
+    selectedNewUserAvatar = avatar;
+    renderNewUserAvatarGrid();
+}
+
+async function selectAvatar(userId, avatar, modalElement) {
+    try {
+        await apiCall(`/api/users/${userId}/avatar`, 'PATCH', { avatar });
+        modalElement.remove();
+        await loadUsers();
+    } catch (error) {
+        console.error('Failed to update avatar:', error);
+        alert('更新头像失败');
+    }
+}

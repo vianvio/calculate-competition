@@ -66,4 +66,13 @@ export class UsersService {
   async remove(id: number): Promise<void> {
     await this.usersRepository.delete(id);
   }
+
+  async updateAvatar(id: number, avatar: string): Promise<User> {
+    const user = await this.findOne(id);
+    if (!user) {
+      throw new Error('User not found');
+    }
+    user.avatar = avatar;
+    return this.usersRepository.save(user);
+  }
 }

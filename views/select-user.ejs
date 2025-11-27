@@ -22,7 +22,11 @@
     <div id="addUserModal" class="modal" style="display: none;">
         <div class="modal-content">
             <h3>添加新用户</h3>
-            <input type="text" id="userName" placeholder="输入用户名" class="input-large">
+            <input type="text" id="userName" placeholder="输入用户名" class="input-large" autocomplete="off">
+            
+            <h4 style="margin-top: 20px; margin-bottom: 10px;">选择头像</h4>
+            <div class="avatar-grid" id="newUserAvatarGrid"></div>
+            
             <div class="modal-buttons">
                 <button class="btn btn-secondary" onclick="hideAddUserModal()">取消</button>
                 <button class="btn btn-primary" onclick="addUser()">确定</button>

@@ -25,7 +25,7 @@
     <script>
         // Globally disable keyboard on input fields
         document.addEventListener('focusin', function(e) {
-            if (e.target.matches('input[type="text"], input[type="tel"], input[type="number"]')) {
+            if (e.target.matches('input[type="tel"], input[type="number"]')) {
                 e.target.readOnly = true;
                 e.target.inputMode = 'none';
             }

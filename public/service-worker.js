@@ -1,4 +1,4 @@
-const CACHE_NAME = 'calculate-competition-v1';
+const CACHE_NAME = 'calculate-competition-v2';
 const BASE_PATH = '/calculate-competition';
 
 const urlsToCache = [
@@ -30,44 +30,52 @@ self.addEventListener('install', (event) => {
   self.skipWaiting();
 });
 
-// Fetch event - serve from cache, fallback to network
-self.addEventListener('fetch', (event) => {
-  event.respondWith(
-    caches.match(event.request)
-      .then((response) => {
-        // Cache hit - return response
-        if (response) {
-          return response;
-        }
+// // Fetch event - serve from cache, fallback to network
+// self.addEventListener('fetch', (event) => {
+//   const requestUrl = new URL(event.request.url);
+  
+//   // 跳过所有 API 请求，直接从网络获取
+//   if (requestUrl.pathname.includes('/api/')) {
+//     event.respondWith(fetch(event.request));
+//     return;
+//   }
+  
+//   event.respondWith(
+//     caches.match(event.request)
+//       .then((response) => {
+//         // Cache hit - return response
+//         if (response) {
+//           return response;
+//         }
 
-        // Clone the request
-        const fetchRequest = event.request.clone();
+//         // Clone the request
+//         const fetchRequest = event.request.clone();
 
-        return fetch(fetchRequest).then((response) => {
-          // Check if valid response
-          if (!response || response.status !== 200 || response.type !== 'basic') {
-            return response;
-          }
+//         return fetch(fetchRequest).then((response) => {
+//           // Check if valid response
+//           if (!response || response.status !== 200 || response.type !== 'basic') {
+//             return response;
+//           }
 
-          // Clone the response
-          const responseToCache = response.clone();
+//           // Clone the response
+//           const responseToCache = response.clone();
 
-          // Only cache GET requests
-          if (event.request.method === 'GET') {
-            caches.open(CACHE_NAME)
-              .then((cache) => {
-                cache.put(event.request, responseToCache);
-              });
-          }
+//           // Only cache GET requests (excluding API calls)
+//           if (event.request.method === 'GET') {
+//             caches.open(CACHE_NAME)
+//               .then((cache) => {
+//                 cache.put(event.request, responseToCache);
+//               });
+//           }
 
-          return response;
-        }).catch((error) => {
-          console.error('Fetch failed:', error);
-          // You could return a custom offline page here
-        });
-      })
-  );
-});
+//           return response;
+//         }).catch((error) => {
+//           console.error('Fetch failed:', error);
+//           // You could return a custom offline page here
+//         });
+//       })
+//   );
+// });
 
 // Activate event - clean up old caches
 self.addEventListener('activate', (event) => {
