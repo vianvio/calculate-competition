@@ -72,16 +72,60 @@ function renderCalendar() {
 function showDayDetails(date, data) {
     const modal = document.createElement('div');
     modal.className = 'modal';
+    
+    // 生成运算类型统计
+    const typeStats = [];
+    const typeNames = {
+        addition: '➕ 加法',
+        subtraction: '➖ 减法',
+        multiplication: '✖️ 乘法',
+        division: '➗ 除法'
+    };
+    
+    Object.keys(data.byType).forEach(type => {
+        const stats = data.byType[type];
+        if (stats.total > 0) {
+            const accuracy = ((stats.correct / stats.total) * 100).toFixed(1);
+            typeStats.push(`
+                <div class="type-stat-row">
+                    <span class="type-name">${typeNames[type]}</span>
+                    <span class="type-count">${stats.correct}/${stats.total}</span>
+                    <span class="type-accuracy" style="color: ${parseFloat(accuracy) === 100 ? '#4CAF50' : '#FF9800'}">
+                        ${accuracy}%
+                    </span>
+                </div>
+            `);
+        }
+    });
+    
     modal.innerHTML = `
         <div class="modal-content">
-            <h3>${date}</h3>
-            <div style="font-size: 20px; margin: 20px 0;">
-                <p>练习次数: ${data.sessions.length}</p>
-                <p>总题数: ${data.totalQuestions}</p>
-                <p>正确: ${data.correctAnswers}</p>
-                <p>正确率: ${((data.correctAnswers / data.totalQuestions) * 100).toFixed(1)}%</p>
+            <h3>📅 ${date}</h3>
+            <div class="day-summary">
+                <div class="summary-item">
+                    <div class="summary-label">练习次数</div>
+                    <div class="summary-value">${data.sessions.length}</div>
+                </div>
+                <div class="summary-item">
+                    <div class="summary-label">总题数</div>
+                    <div class="summary-value">${data.totalQuestions}</div>
+                </div>
+                <div class="summary-item">
+                    <div class="summary-label">正确率</div>
+                    <div class="summary-value" style="color: ${data.isPerfect ? '#4CAF50' : '#FF9800'}">
+                        ${((data.correctAnswers / data.totalQuestions) * 100).toFixed(1)}%
+                    </div>
+                </div>
             </div>
-            <button class="btn btn-primary" onclick="this.parentElement.parentElement.remove()">关闭</button>
+            
+            ${typeStats.length > 0 ? `
+                <div class="type-stats">
+                    <h4>各运算类型统计</h4>
+                    ${typeStats.join('')}
+                </div>
+            ` : ''}
+            
+            <button class="btn btn-primary btn-large" onclick="this.parentElement.parentElement.remove()">关闭</button>
         </div>
     `;
     document.body.appendChild(modal);

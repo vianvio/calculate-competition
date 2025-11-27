@@ -138,11 +138,33 @@ export class PracticeService {
           totalQuestions: 0,
           correctAnswers: 0,
           sessions: [],
+          byType: {
+            addition: { total: 0, correct: 0 },
+            subtraction: { total: 0, correct: 0 },
+            multiplication: { total: 0, correct: 0 },
+            division: { total: 0, correct: 0 },
+          },
         };
       }
       calendar[date].totalQuestions += session.totalQuestions;
       calendar[date].correctAnswers += session.correctAnswers;
       calendar[date].sessions.push(session);
+      
+      // 统计每种运算类型
+      session.questions.forEach(q => {
+        let type = '';
+        if (q.question.includes('+')) type = 'addition';
+        else if (q.question.includes('-')) type = 'subtraction';
+        else if (q.question.includes('×')) type = 'multiplication';
+        else if (q.question.includes('÷')) type = 'division';
+        
+        if (type && calendar[date].byType[type]) {
+          calendar[date].byType[type].total++;
+          if (q.correct) {
+            calendar[date].byType[type].correct++;
+          }
+        }
+      });
     });
 
     // Mark perfect days

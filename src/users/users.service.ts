@@ -41,6 +41,46 @@ export class UsersService {
     const correctAnswers = user.practiceSessions.reduce((sum, session) => sum + session.correctAnswers, 0);
     const practiceAccuracy = totalProblems > 0 ? (correctAnswers / totalProblems * 100).toFixed(2) : 0;
 
+    // 详细统计：按运算类型和位数
+    const detailedStats = {
+      byType: {
+        addition: { total: 0, correct: 0, byDigits: {} },
+        subtraction: { total: 0, correct: 0, byDigits: {} },
+        multiplication: { total: 0, correct: 0, byDigits: {} },
+        division: { total: 0, correct: 0, byDigits: {} },
+      },
+    };
+
+    // 遍历所有练习记录
+    user.practiceSessions.forEach(session => {
+      const digits = session.settings.digits || 2;
+      
+      session.questions.forEach(q => {
+        let type = '';
+        if (q.question.includes('+')) type = 'addition';
+        else if (q.question.includes('-')) type = 'subtraction';
+        else if (q.question.includes('×')) type = 'multiplication';
+        else if (q.question.includes('÷')) type = 'division';
+        
+        if (type && detailedStats.byType[type]) {
+          // 总计
+          detailedStats.byType[type].total++;
+          if (q.correct) {
+            detailedStats.byType[type].correct++;
+          }
+          
+          // 按位数统计
+          if (!detailedStats.byType[type].byDigits[digits]) {
+            detailedStats.byType[type].byDigits[digits] = { total: 0, correct: 0 };
+          }
+          detailedStats.byType[type].byDigits[digits].total++;
+          if (q.correct) {
+            detailedStats.byType[type].byDigits[digits].correct++;
+          }
+        }
+      });
+    });
+
     // Calculate competition stats
     const competitions = [...user.competitionsAsPlayer1, ...user.competitionsAsPlayer2];
     const wins = competitions.filter(comp => {
@@ -60,6 +100,7 @@ export class UsersService {
         competitionTotal: competitions.length,
         winRate: parseFloat(winRate as string),
       },
+      detailedStats,
     };
   }
 
