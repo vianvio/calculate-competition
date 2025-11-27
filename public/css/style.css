@@ -5,6 +5,12 @@
     touch-action: manipulation;
     -ms-touch-action: manipulation;
     user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    
+    /* 禁用长按菜单（关键） */
+    -webkit-touch-callout: none;
 }
 
 :root {
@@ -535,6 +541,7 @@ select.input-medium {
     padding: 20px;
     background: var(--bg-light);
     border-radius: 15px;
+    margin-top: 20px;
     margin-bottom: 40px;
     font-size: 24px;
 }
