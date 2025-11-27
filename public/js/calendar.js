@@ -52,13 +52,42 @@ function renderCalendar() {
         }
         
         let icon = '';
+        let typeStatsHtml = '';
         if (dayData && dayData.hasPractice) {
             icon = dayData.isPerfect ? '⭐️' : '✓';
+            
+            // 生成简洁的运算类型统计
+            const typeIcons = {
+                addition: '➕',
+                subtraction: '➖',
+                multiplication: '✖️',
+                division: '➗'
+            };
+            
+            const typeStatsArray = [];
+            Object.keys(dayData.byType).forEach(type => {
+                const stats = dayData.byType[type];
+                if (stats.total > 0) {
+                    const accuracy = Math.round((stats.correct / stats.total) * 100);
+                    typeStatsArray.push({
+                        icon: typeIcons[type],
+                        total: stats.total,
+                        accuracy: accuracy
+                    });
+                }
+            });
+            
+            if (typeStatsArray.length > 0) {
+                typeStatsHtml = `<div class="day-stats">${typeStatsArray.map(s => 
+                    `<span class="type-mini" title="${s.icon} ${s.total}题 ${s.accuracy}%">${s.icon}${s.total}</span>`
+                ).join('')}</div>`;
+            }
         }
         
         dayElement.innerHTML = `
             <div class="date">${day}</div>
             ${icon ? `<div class="icon">${icon}</div>` : ''}
+            ${typeStatsHtml}
         `;
         
         if (dayData && dayData.hasPractice) {

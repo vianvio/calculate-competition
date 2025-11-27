@@ -957,6 +957,26 @@ select.input-medium {
     margin-top: 5px;
 }
 
+.calendar-day .day-stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-top: 5px;
+    justify-content: center;
+    max-width: 100%;
+}
+
+.calendar-day .type-mini {
+    font-size: 10px;
+    padding: 2px 4px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 4px;
+    white-space: nowrap;
+    font-weight: 600;
+    color: var(--text-dark);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
 .calendar-legend {
     display: flex;
     justify-content: center;
@@ -1185,6 +1205,16 @@ select.input-medium {
     
     .calendar-day .icon {
         font-size: 14px;
+    }
+    
+    .calendar-day .day-stats {
+        gap: 2px;
+        margin-top: 3px;
+    }
+    
+    .calendar-day .type-mini {
+        font-size: 8px;
+        padding: 1px 2px;
     }
     
     .calendar-controls h2 {
